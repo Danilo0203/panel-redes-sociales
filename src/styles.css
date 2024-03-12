@@ -1,3 +1,85 @@
 @tailwind base;
 @tailwind components;
+
+@font-face {
+  font-family: "Inter";
+  src: url(assets/fonts/Inter-VariableFont_slnt\,wght.ttf);
+}
+@layer base {
+  html {
+    font-size: 14px;
+  }
+}
+@layer components {
+  .theme-switch {
+    @apply [--back-clouds-color:#AACADF] [--circle-container-diameter:3.375em] [--circle-container-offset:calc((var(--circle-container-diameter)_-_var(--container-height))_/_2_*_-1)] [--circle-transition:0.3s_cubic-bezier(0,-0.02,0.35,1.17)] [--clouds-color:#F3FDFF] [--container-height:2.5em] [--container-light-bg:#3D7EAE] [--container-night-bg:#1D1F2C] [--container-radius:6.25em] [--container-width:5.625em] [--moon-bg:#C4C9D1] [--spot-color:#959DB1] [--stars-color:#fff] [--sun-bg:#ECCA2F] [--sun-moon-diameter:2.125em] /* [--toggle-size:25px]  */[--transition:0.5s_cubic-bezier(0,-0.02,0.4,1.25)];
+
+    /* the size is adjusted using font-size,
+     this is not transform scale,
+     so you can choose any size */
+
+    /* radius 0 - minecraft mode :) */
+  }
+  .theme-switch,
+  .theme-switch *,
+  .theme-switch *::before,
+  .theme-switch *::after {
+    @apply m-0 box-border p-0 text-[length:var(--toggle-size)] [-webkit-box-sizing:border-box];
+  }
+  .theme-switch__container {
+    @apply relative h-[var(--container-height)] w-[var(--container-width)] cursor-pointer overflow-hidden rounded-[var(--container-radius)] bg-[color:var(--container-light-bg)] shadow-[0em_-0.062em_0.062em_rgba(0,0,0,0.25),0em_0.062em_0.125em_rgba(255,255,255,0.94)] transition-[var(--transition)] [-webkit-box-shadow:0em_-0.062em_0.062em_rgba(0,0,0,0.25),0em_0.062em_0.125em_rgba(255,255,255,0.94)] [-webkit-transition:var(--transition)] before:absolute before:inset-0 before:z-[1] before:rounded-[var(--container-radius)] before:shadow-[0em_0.05em_0.187em_rgba(0,0,0,0.25)_inset,0em_0.05em_0.187em_rgba(0,0,0,0.25)_inset] before:content-[""] before:[-webkit-box-shadow:0em_0.05em_0.187em_rgba(0,0,0,0.25)_inset,0em_0.05em_0.187em_rgba(0,0,0,0.25)_inset];
+  }
+  .theme-switch__checkbox {
+    @apply hidden;
+  }
+  .theme-switch__circle-container {
+    @apply pointer-events-none absolute left-[var(--circle-container-offset)] top-[var(--circle-container-offset)] flex h-[var(--circle-container-diameter)] w-[var(--circle-container-diameter)] rounded-[var(--container-radius)] bg-[rgba(255,255,255,0.1)] shadow-[inset_0_0_0_3.375em_rgba(255,255,255,0.1),inset_0_0_0_3.375em_rgba(255,255,255,0.1),0_0_0_0.625em_rgba(255,255,255,0.1),0_0_0_1.25em_rgba(255,255,255,0.1)] transition-[var(--circle-transition)] [-webkit-box-shadow:inset_0_0_0_3.375em_rgba(255,255,255,0.1),inset_0_0_0_3.375em_rgba(255,255,255,0.1),0_0_0_0.625em_rgba(255,255,255,0.1),0_0_0_1.25em_rgba(255,255,255,0.1)] [-webkit-transition:var(--circle-transition)] [display:-ms-flexbox] [display:-webkit-box] hover:left-[calc(var(--circle-container-offset)_+_0.187em)];
+  }
+  .theme-switch__sun-moon-container {
+    @apply pointer-events-auto relative z-[2] m-auto h-[var(--sun-moon-diameter)] w-[var(--sun-moon-diameter)] overflow-hidden rounded-[var(--container-radius)] bg-[color:var(--sun-bg)] shadow-[0.062em_0.062em_0.062em_0em_rgba(254,255,239,0.61)_inset,0em_-0.062em_0.062em_0em_#a1872a_inset] transition-[var(--transition)] [-webkit-transition:var(--transition)] [-webkit-box-shadow:0.062em_0.062em_0.062em_0em_rgba(254,255,239,0.61)_inset,0em_-0.062em_0.062em_0em_#a1872a_inset] [-webkit-filter:drop-shadow(0.062em_0.125em_0.125em_rgba(0,0,0,0.25))_drop-shadow(0em_0.062em_0.125em_rgba(0,0,0,0.25))] [filter:drop-shadow(0.062em_0.125em_0.125em_rgba(0,0,0,0.25))_drop-shadow(0em_0.062em_0.125em_rgba(0,0,0,0.25))];
+  }
+  .theme-switch__moon {
+    @apply relative h-full w-full translate-x-full rounded-[inherit] bg-[color:var(--moon-bg)] shadow-[0.062em_0.062em_0.062em_0em_rgba(254,255,239,0.61)_inset,0em_-0.062em_0.062em_0em_#969696_inset] transition-[var(--transition)] [-webkit-transition:var(--transition)] [-ms-transform:translateX(100%)] [-webkit-box-shadow:0.062em_0.062em_0.062em_0em_rgba(254,255,239,0.61)_inset,0em_-0.062em_0.062em_0em_#969696_inset] [-webkit-transform:translateX(100%)];
+  }
+  .theme-switch__spot {
+    @apply absolute left-[0.312em] top-[0.75em] h-[0.75em] w-[0.75em] rounded-[var(--container-radius)] bg-[color:var(--spot-color)] shadow-[0em_0.0312em_0.062em_rgba(0,0,0,0.25)_inset] [-webkit-box-shadow:0em_0.0312em_0.062em_rgba(0,0,0,0.25)_inset];
+  }
+  .theme-switch__spot:nth-of-type(2) {
+    @apply left-[1.375em] top-[0.937em] h-[0.375em] w-[0.375em];
+  }
+  .theme-switch__spot:nth-last-of-type(3) {
+    @apply left-[0.812em] top-[0.312em] h-[0.25em] w-[0.25em];
+  }
+  .theme-switch__clouds {
+    @apply absolute bottom-[-0.625em] left-[0.312em] h-[1.25em] w-[1.25em] rounded-[var(--container-radius)] bg-[color:var(--clouds-color)] shadow-[0.937em_0.312em_var(--clouds-color),-0.312em_-0.312em_var(--back-clouds-color),1.437em_0.375em_var(--clouds-color),0.5em_-0.125em_var(--back-clouds-color),2.187em_0_var(--clouds-color),1.25em_-0.062em_var(--back-clouds-color),2.937em_0.312em_var(--clouds-color),2em_-0.312em_var(--back-clouds-color),3.625em_-0.062em_var(--clouds-color),2.625em_0em_var(--back-clouds-color),4.5em_-0.312em_var(--clouds-color),3.375em_-0.437em_var(--back-clouds-color),4.625em_-1.75em_0_0.437em_var(--clouds-color),4em_-0.625em_var(--back-clouds-color),4.125em_-2.125em_0_0.437em_var(--back-clouds-color)] transition-[0.5s] duration-[cubic-bezier(0,-0.02,0.4,1.25)] [-webkit-box-shadow:0.937em_0.312em_var(--clouds-color),-0.312em_-0.312em_var(--back-clouds-color),1.437em_0.375em_var(--clouds-color),0.5em_-0.125em_var(--back-clouds-color),2.187em_0_var(--clouds-color),1.25em_-0.062em_var(--back-clouds-color),2.937em_0.312em_var(--clouds-color),2em_-0.312em_var(--back-clouds-color),3.625em_-0.062em_var(--clouds-color),2.625em_0em_var(--back-clouds-color),4.5em_-0.312em_var(--clouds-color),3.375em_-0.437em_var(--back-clouds-color),4.625em_-1.75em_0_0.437em_var(--clouds-color),4em_-0.625em_var(--back-clouds-color),4.125em_-2.125em_0_0.437em_var(--back-clouds-color)] [-webkit-transition:0.5s_cubic-bezier(0,-0.02,0.4,1.25)];
+  }
+  .theme-switch__stars-container {
+    @apply absolute -top-full left-[0.312em] h-auto w-[2.75em] text-[color:var(--stars-color)] transition-[var(--transition)] [-webkit-transition:var(--transition)];
+  }
+
+  /* actions */
+  .theme-switch__checkbox:checked + .theme-switch__container {
+    @apply bg-[color:var(--container-night-bg)];
+  }
+  .theme-switch__checkbox:checked
+    + .theme-switch__container
+    .theme-switch__circle-container {
+    @apply left-[calc(100%_-_var(--circle-container-offset)_-_var(--circle-container-diameter))] hover:left-[calc(100%_-_var(--circle-container-offset)_-_var(--circle-container-diameter)_-_0.187em)];
+  }
+  .theme-switch__checkbox:checked
+    + .theme-switch__container
+    .theme-switch__moon {
+    @apply translate-x-0 [-ms-transform:translate(0)] [-webkit-transform:translate(0)];
+  }
+  .theme-switch__checkbox:checked
+    + .theme-switch__container
+    .theme-switch__clouds {
+    @apply bottom-[-4.062em];
+  }
+  .theme-switch__checkbox:checked
+    + .theme-switch__container
+    .theme-switch__stars-container {
+    @apply top-2/4 -translate-y-2/4 [-ms-transform:translateY(-50%)] [-webkit-transform:translateY(-50%)];
+  }
+}
 @tailwind utilities;
