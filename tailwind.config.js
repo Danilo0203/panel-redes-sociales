@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from "tailwindcss/defaultTheme";
 export default {
   darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -34,7 +35,7 @@ export default {
           "linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))",
       },
       fontFamily: {
-        Inter: ["Inter"],
+        Inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {},
     },

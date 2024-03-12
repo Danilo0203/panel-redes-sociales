@@ -8,6 +8,7 @@
 @layer base {
   html {
     font-size: 14px;
+    font-family: "Inter";
   }
 }
 @layer components {
